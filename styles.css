@@ -118,6 +118,11 @@ nav {
   height: 60%;
 }
 
+.cover-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .iphone {
   height: 100%;
   filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
@@ -149,9 +154,31 @@ nav {
   position: absolute;
   top: 30%;
   right: 30%;
+  z-index: -1;
 }
 .small-circle {
   position: absolute;
   bottom: 0;
   left: 20%;
+}
+
+@media screen and (max-width: 1024px) {
+  .mid-circle {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .main-container {
+    flex-direction: column;
+  }
+  .button {
+    padding: 50px 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  }
+  .small-circle {
+    display: none;
+  }
 }
