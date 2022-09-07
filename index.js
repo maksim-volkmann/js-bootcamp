@@ -19,6 +19,7 @@ const connectionToDB = async () => {
   }
 };
 
+//CREATE USER
 app.post("/create", async (req, res) => {
   try {
     const newUser = new userModel(req.body);
