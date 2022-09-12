@@ -1,21 +1,4 @@
 import userModel from "../models/userModel.js";
-import bcrypt from "bcrypt";
-
-export const createUser = async (req, res) => {
-  try {
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(req.body.password, salt);
-    const newUser = new userModel({
-      ...req.body,
-      password: hash,
-    });
-    await newUser.save();
-    res.status(201).send("New user is created");
-  } catch (error) {
-    res.status(405).send(error);
-    console.error(error);
-  }
-};
 
 export const getAllUsers = async (req, res) => {
   try {
@@ -46,15 +29,27 @@ export const deleteUserById = async (req, res) => {
   }
 };
 
+export const deleteAllUsers = async (req, res) => {
+  try {
+    await userModel.deleteMany({ userName: req.body.userName });
+    res.status(200).send(`all users has been successfully deleted`);
+  } catch (error) {
+    console.error(error);
+    res.status(400).send("couldnt find record that matches query");
+  }
+};
+
 export const updateUser = async (req, res) => {
   try {
     const updatedUser = await userModel.findByIdAndUpdate(
       req.params.id,
       {
         $set: req.body,
+        isAdmin: req.user.isAdmin ? req.body.isAdmin : false,
       },
       { new: true }
     );
+
     res.status(200).json(updatedUser);
   } catch (error) {
     console.error(error);

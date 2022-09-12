@@ -1,6 +1,7 @@
 import express from "express";
+import { verifySessionToken } from "../authCheck/authCheck.js";
 import {
-  createUser,
+  deleteAllUsers,
   deleteUserById,
   getAllUsers,
   getUserById,
@@ -9,14 +10,14 @@ import {
 
 const router = express.Router();
 
-router.post("/create", createUser);
+router.get("/get", verifySessionToken, getAllUsers);
 
-router.get("/get", getAllUsers);
+router.get("/get/:id", verifySessionToken, getUserById);
 
-router.get("/get/:id", getUserById);
+router.delete("/delete/:id", verifySessionToken, deleteUserById);
 
-router.delete("/delete/:id", deleteUserById);
+router.put("/update/:id", verifySessionToken, updateUser);
 
-router.put("/update/:id", updateUser);
+router.delete("/delete", verifySessionToken, deleteAllUsers);
 
 export default router;

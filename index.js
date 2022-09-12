@@ -1,7 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import userRouter from "./routes/userRoute.js";
+import authRouter from "./routes/authRoute.js";
 
 const app = express();
 const port = 3001;
@@ -9,6 +11,7 @@ const port = 3001;
 dotenv.config();
 
 app.use(express.json());
+app.use(cookieParser());
 
 const connectionToDB = async () => {
   try {
@@ -19,8 +22,11 @@ const connectionToDB = async () => {
   }
 };
 
-//CREATE USER
+//USER
 app.use("/api", userRouter);
+
+//AUTH
+app.use("/api", authRouter);
 
 app.listen(port, () => {
   connectionToDB();
