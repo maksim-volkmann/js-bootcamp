@@ -4,6 +4,7 @@ const FavoritePlaceSchema = new mongoose.Schema({
   place: {
     type: String,
     required: true,
+    unique: true,
   },
   isIndoor: {
     type: Boolean,
@@ -24,10 +25,7 @@ const FavoritePlaceSchema = new mongoose.Schema({
   photo: {
     type: String,
   },
-  animal: {
-    type: [String],
-    default: [],
-  },
+  animal: [{ entity: String, id: String }],
 });
 
 export default mongoose.model("FavoritePlace", FavoritePlaceSchema);

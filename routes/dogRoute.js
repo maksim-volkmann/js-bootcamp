@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  createDog,
   deleteDogById,
   getAllDogs,
   getDogById,
@@ -7,6 +8,8 @@ import {
 } from "../controllers/dogController.js";
 
 const router = express.Router();
+
+router.post("/create", createDog);
 
 router.get("/get", getAllDogs);
 

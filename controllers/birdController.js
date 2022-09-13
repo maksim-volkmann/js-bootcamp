@@ -1,5 +1,18 @@
 import birdModel from "../models/birdModel.js";
 
+export const createBird = async (req, res) => {
+  try {
+    const newBird = new birdModel({
+      ...req.body,
+    });
+    await newBird.save();
+    res.status(201).send("New Bird is created");
+  } catch (error) {
+    res.status(405).send(error);
+    console.error(error);
+  }
+};
+
 export const getAllBirds = async (req, res) => {
   try {
     const allBirds = await birdModel.find({}, { password: 0 });
@@ -45,7 +58,6 @@ export const updateBird = async (req, res) => {
       req.params.id,
       {
         $set: req.body,
-        isAdmin: req.Bird.isAdmin ? req.body.isAdmin : false,
       },
       { new: true }
     );

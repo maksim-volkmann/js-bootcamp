@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  createCat,
   deleteCatById,
   getAllCats,
   getCatById,
@@ -7,6 +8,8 @@ import {
 } from "../controllers/catController.js";
 
 const router = express.Router();
+
+router.post("/create", createCat);
 
 router.get("/get", getAllCats);
 

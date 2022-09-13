@@ -1,19 +1,28 @@
 import express from "express";
 import {
-  deleteFavoriteRoomById,
-  getAllFavoriteRooms,
-  getFavoriteRoomById,
-  updateFavoriteRoom,
-} from "../controller/favoriteRoomController.js";
+  createfavoritePlace,
+  deleteFavoritePlaceById,
+  getAllFavoritePlaces,
+  getAnimalsByPlace,
+  getFavoritePlaceById,
+  getMostPopularPlace,
+  updateFavoritePlace,
+} from "../controllers/favoritePlaceController.js";
 
 const router = express.Router();
 
-router.get("/get", getAllFavoriteRooms);
+router.post("/create", createfavoritePlace);
 
-router.get("/get/:id", getFavoriteRoomById);
+router.get("/get", getAllFavoritePlaces);
 
-router.delete("/delete/:id", deleteFavoriteRoomById);
+router.get("/get/popular", getMostPopularPlace);
 
-router.put("/update/:id", updateFavoriteRoom);
+router.get("/get/:id", getFavoritePlaceById);
+
+router.delete("/delete/:id", deleteFavoritePlaceById);
+
+router.put("/update/:id", updateFavoritePlace);
+
+router.get("/get/place/:placeName", getAnimalsByPlace);
 
 export default router;

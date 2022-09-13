@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  createBird,
   deleteBirdById,
   getAllBirds,
   getBirdById,
@@ -7,6 +8,8 @@ import {
 } from "../controllers/birdController.js";
 
 const router = express.Router();
+
+router.post("/create", createBird);
 
 router.get("/get", getAllBirds);
 

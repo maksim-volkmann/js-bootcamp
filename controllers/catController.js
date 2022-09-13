@@ -1,5 +1,18 @@
 import catModel from "../models/catModel.js";
 
+export const createCat = async (req, res) => {
+  try {
+    const newCat = new catModel({
+      ...req.body,
+    });
+    await newCat.save();
+    res.status(201).send("New Cat is created");
+  } catch (error) {
+    res.status(405).send(error);
+    console.error(error);
+  }
+};
+
 export const getAllCats = async (req, res) => {
   try {
     const allCats = await catModel.find({}, { password: 0 });
@@ -45,7 +58,6 @@ export const updateCat = async (req, res) => {
       req.params.id,
       {
         $set: req.body,
-        isAdmin: req.Cat.isAdmin ? req.body.isAdmin : false,
       },
       { new: true }
     );

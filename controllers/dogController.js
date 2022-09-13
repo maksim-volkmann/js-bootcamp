@@ -1,5 +1,19 @@
 import dogModel from "../models/dogModel.js";
 
+export const createDog = async (req, res) => {
+  console.log("here");
+  try {
+    const newDog = new dogModel({
+      ...req.body,
+    });
+    await newDog.save();
+    res.status(201).send("New Dog is created");
+  } catch (error) {
+    res.status(405).send(error);
+    console.error(error);
+  }
+};
+
 export const getAllDogs = async (req, res) => {
   try {
     const allDogs = await dogModel.find({}, { password: 0 });
@@ -45,7 +59,6 @@ export const updateDog = async (req, res) => {
       req.params.id,
       {
         $set: req.body,
-        isAdmin: req.Dog.isAdmin ? req.body.isAdmin : false,
       },
       { new: true }
     );
