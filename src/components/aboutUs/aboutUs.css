@@ -1,0 +1,18 @@
+.aboutUs {
+  height: calc(100vh - 150px);
+}
+
+.aboutUsWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aboutUsWrapperLeft {
+  display: flex;
+  flex: 1;
+}
+.aboutUsWrapperRight {
+  display: flex;
+  flex: 2;
+}
